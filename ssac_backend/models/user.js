@@ -15,21 +15,4 @@ const userSchema = new Schema({
 	//추가정보를 입력해주는 것이기 때문에 default값을 설정해주는게 좋다
 });
 
-userSchema.statics.checkAuth = async function (params) {
-	const { userId, tokenId } = params;
-	try {
-		const ownResult = await this.findOne({ _id: userId }); // 게시물의 id
-		const ownId = ownResult._id;
-		// console.log(ownResult);
-		// console.log(ownId);
-		if (ownId.toString() !== tokenId.toString()) {
-			return -1;
-		}
-		return 1;
-	} catch (error) {
-		console.log(error);
-		return -2;
-	}
-};
-
 module.exports = mongoose.model("user", userSchema);

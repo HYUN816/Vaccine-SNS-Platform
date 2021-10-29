@@ -6,9 +6,10 @@ const upload = require("../../modules/awsUpload");
 
 router.post("/signup", authController.signUp);
 router.post("/signin", authController.signIn);
+router.get("/profile", authModule.logIn, authController.getProfile);
 router.post("/profileimage", upload.single("img"), authController.uploadImage);
 
-router.delete("/withdrawal", authModule.loggedIn, authController.withdrawal);
-router.put("/profile/:id", authModule.loggedIn, authController.updateProfile);
+router.delete("/withdrawal", authModule.logIn, authController.withdrawal);
+router.put("/profile", authModule.logIn, authController.updateProfile);
 
 module.exports = router;

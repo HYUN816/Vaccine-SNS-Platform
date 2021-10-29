@@ -2,7 +2,7 @@ const jwtModule = require("./jwtModule");
 const user = require("../models/user");
 
 const authModule = {
-	loggedIn: async (req, res, next) => {
+	logIn: async (req, res, next) => {
 		const token = req.headers.authorization;
 		if (!token) {
 			return res.status(409).json({
@@ -11,8 +11,8 @@ const authModule = {
 			});
 		}
 		const decoded = jwtModule.verify(token);
-		// console.log(decoded);
-		// console.log(decoded.verified);
+		console.log(decoded);
+		console.log(decoded.verified);
 
 		if (decoded === -1) {
 			return res.status(409).json({
@@ -28,8 +28,10 @@ const authModule = {
 			});
 		}
 
+		// console.log(decoded.verified);
+
 		// if (!decoded.verified) {
-		// 	return res.status(300).json({
+		// 	res.status(401).json({
 		// 		message: "추가 정보를 입력하시기 바랍니다.",
 		// 	});
 		// }
